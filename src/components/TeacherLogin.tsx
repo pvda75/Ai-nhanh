@@ -30,22 +30,22 @@ export default function TeacherLogin({ onLogin, onBack }: Props) {
     >
       <button 
         onClick={onBack}
-        className="absolute top-4 left-4 p-2 text-slate-400 hover:text-indigo-600 transition-colors rounded-full hover:bg-slate-100"
+        className="absolute top-4 left-4 p-2 text-violet-400 hover:text-violet-700 transition-colors rounded-full hover:bg-violet-50"
       >
         <ArrowLeft size={20} />
       </button>
 
       <div className="text-center mb-8 mt-4">
-        <div className="inline-flex items-center justify-center w-16 h-16 bg-slate-100 rounded-full mb-4 text-slate-600">
+        <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-violet-100 to-fuchsia-100 rounded-2xl mb-4 text-violet-600 shadow-inner">
           <Lock size={32} />
         </div>
-        <h2 className="text-2xl font-bold text-slate-900">Khu Vực Giáo Viên</h2>
-        <p className="text-slate-500 mt-1">Vui lòng nhập mã PIN để tiếp tục</p>
+        <h2 className="text-2xl font-bold text-indigo-950">Khu Vực Giáo Viên</h2>
+        <p className="text-violet-600 mt-1 font-medium">Vui lòng nhập mã PIN để tiếp tục</p>
       </div>
 
       <form onSubmit={handleSubmit} className="max-w-xs mx-auto space-y-6">
         {error && (
-          <div className="p-3 bg-red-50 text-red-600 text-sm rounded-lg border border-red-100 text-center">
+          <div className="p-3 bg-rose-50 text-rose-600 text-sm rounded-lg border border-rose-100 text-center font-medium">
             {error}
           </div>
         )}
@@ -56,17 +56,17 @@ export default function TeacherLogin({ onLogin, onBack }: Props) {
             required
             value={pin}
             onChange={(e) => setPin(e.target.value)}
-            className="w-full px-4 py-3 text-center text-2xl tracking-[0.5em] rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all font-mono"
+            className="w-full px-4 py-3 text-center text-2xl tracking-[0.5em] rounded-xl border-2 border-violet-100 focus:ring-4 focus:ring-violet-500/20 focus:border-violet-500 outline-none transition-all font-mono bg-white/80 hover:border-violet-200 text-indigo-950"
             placeholder="••••••"
             maxLength={6}
           />
-          <p className="text-xs text-center text-slate-400 mt-2">Mã PIN mặc định: 123456</p>
+          <p className="text-xs text-center text-violet-400 mt-2 font-medium">Mã PIN mặc định: 123456</p>
         </div>
 
         <button
           type="submit"
           disabled={pin.length < 4}
-          className="w-full py-3 bg-slate-900 hover:bg-slate-800 disabled:bg-slate-300 disabled:cursor-not-allowed text-white rounded-xl font-bold transition-colors"
+          className="w-full py-3.5 bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-700 hover:to-fuchsia-700 disabled:from-violet-300 disabled:to-fuchsia-300 disabled:cursor-not-allowed text-white rounded-xl font-bold transition-all active:scale-[0.98] shadow-lg shadow-violet-200/50"
         >
           Đăng Nhập
         </button>

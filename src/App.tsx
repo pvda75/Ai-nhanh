@@ -79,8 +79,8 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-[100dvh] bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-0 md:p-4 font-sans text-slate-800">
-      <div className="w-full h-[100dvh] md:h-auto md:max-w-2xl bg-white md:rounded-2xl shadow-none md:shadow-xl overflow-hidden relative flex flex-col">
+    <div className="min-h-[100dvh] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-violet-100 via-fuchsia-50 to-cyan-100 flex items-center justify-center p-0 md:p-4 font-sans text-slate-800">
+      <div className="w-full h-[100dvh] md:h-auto md:max-w-2xl bg-white/95 backdrop-blur-sm md:rounded-3xl shadow-none md:shadow-2xl md:shadow-violet-200/50 overflow-hidden relative flex flex-col">
         {view === 'start' && (
           <StartScreen 
             onStart={handleStart} 
