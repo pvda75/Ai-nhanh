@@ -1,0 +1,53 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    //
+    // Collection: results
+    // Document ID: {studentId} (format: name_className)
+    // Fields:
+    //   - name: string (required, length 1-50)
+    //   - className: string (required, length 1-20)
+    //   - score: number (required, 0-10)
+    //   - timeTaken: number (required, > 0)
+    //   - createdAt: timestamp (required)
+    //
+    // ===============================================================
+
+    // Helper Functions
+    function hasRequiredFields(fields) {
+      return request.resource.data.keys().hasAll(fields);
+    }
+
+    function hasOnlyAllowedFields(fields) {
+      return request.resource.data.keys().hasOnly(fields);
+    }
+
+    function isValidResult() {
+      let data = request.resource.data;
+      return hasRequiredFields(['name', 'className', 'score', 'timeTaken', 'createdAt']) &&
+             hasOnlyAllowedFields(['name', 'className', 'score', 'timeTaken', 'createdAt']) &&
+             data.name is string && data.name.size() > 0 && data.name.size() <= 50 &&
+             data.className is string && data.className.size() > 0 && data.className.size() <= 20 &&
+             data.score is number && data.score >= 0 && data.score <= 10 &&
+             data.timeTaken is number && data.timeTaken >= 0 &&
+             data.createdAt is timestamp;
+    }
+
+    match /results/{studentId} {
+      // Anyone can read (Teacher dashboard uses client-side PIN)
+      allow read: if true;
+      
+      // Students can only submit once (create only if document doesn't exist)
+      allow create: if isValidResult() && !exists(/databases/$(database)/documents/results/$(studentId));
+      
+      // No updates allowed
+      allow update: if false;
+
+      // Allow delete for teacher dashboard
+      allow delete: if true;
+    }
+  }
+}

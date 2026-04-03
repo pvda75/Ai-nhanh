@@ -1,0 +1,40 @@
+{
+  "entities": {
+    "StudentResult": {
+      "title": "Student Result",
+      "description": "The result of a student playing the quiz game.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The student's name."
+        },
+        "className": {
+          "type": "string",
+          "description": "The student's class name (e.g., 10C4)."
+        },
+        "score": {
+          "type": "number",
+          "description": "The student's score out of 10."
+        },
+        "timeTaken": {
+          "type": "number",
+          "description": "Time taken to complete the quiz in seconds."
+        },
+        "createdAt": {
+          "type": "timestamp",
+          "description": "When the result was submitted."
+        }
+      },
+      "required": ["name", "className", "score", "timeTaken", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/results/{studentId}": {
+      "schema": {
+        "$ref": "#/entities/StudentResult"
+      },
+      "description": "Stores the results of the students. The document ID is a combination of name and class to ensure they only play once."
+    }
+  }
+}
